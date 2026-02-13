@@ -17,6 +17,9 @@ opt.updatetime = 200
 
 opt.clipboard = "unnamedplus"
 
+opt.ignorecase = true
+opt.smartcase = true
+
 opt.list = true
 opt.listchars = { tab = "│ ", trail = "·", nbsp = "␣" }
 
