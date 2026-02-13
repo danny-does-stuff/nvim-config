@@ -102,25 +102,44 @@ require("lazy").setup({
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "master",
 		build = ":TSUpdate",
-		opts = {
-			highlight = { enable = true },
-			indent = { enable = true },
-			ensure_installed = {
-				"lua",
-				"vim",
-				"vimdoc",
-				"javascript",
-				"typescript",
-				"tsx",
-				"json",
-				"yaml",
-				"html",
-				"css",
-				"bash",
-				"markdown",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = {
+					"lua",
+					"vim",
+					"vimdoc",
+					"javascript",
+					"typescript",
+					"tsx",
+					"json",
+					"yaml",
+					"html",
+					"css",
+					"bash",
+					"markdown",
+				},
+				sync_install = false,
+				auto_install = true,
+				highlight = { enable = true },
+				indent = { enable = true },
+			})
+		end,
+	},
+
+	-- Treesitter context
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+			opts = {
+				enable = true,
+				mode = "topline",
+				multiline_threshold = 2,
 			},
-		},
+		config = function(_, opts)
+			require("treesitter-context").setup(opts)
+		end,
 	},
 
 	-- Telescope
