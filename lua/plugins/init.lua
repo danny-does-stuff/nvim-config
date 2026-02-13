@@ -51,6 +51,9 @@ require("lazy").setup({
 				map("n", "[c", function()
 					gs.nav_hunk("prev")
 				end, "Prev hunk")
+				map("n", "<leader>hn", function()
+					gs.nav_hunk("next")
+				end, "Next hunk")
 
 				-- Hunk actions
 				map("n", "<leader>hs", gs.stage_hunk, "Stage hunk")
