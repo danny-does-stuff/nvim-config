@@ -12,6 +12,7 @@ return {
 				"jsonls",
 				"yamlls",
 				"bashls",
+				"intelephense",
 			},
 		},
 	},
@@ -47,9 +48,18 @@ return {
 			vim.lsp.config("jsonls", {})
 			vim.lsp.config("yamlls", {})
 			vim.lsp.config("bashls", {})
+			vim.lsp.config("intelephense", {
+				settings = {
+					intelephense = {
+						format = {
+							braces = "k&r",
+						},
+					},
+				},
+			})
 
 			-- Enable servers
-			vim.lsp.enable({ "lua_ls", "ts_ls", "eslint", "jsonls", "yamlls", "bashls" })
+			vim.lsp.enable({ "lua_ls", "ts_ls", "eslint", "jsonls", "yamlls", "bashls", "intelephense" })
 		end,
 	},
 }
