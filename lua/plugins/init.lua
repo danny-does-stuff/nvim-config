@@ -236,4 +236,7 @@ require("lazy").setup({
 
 	-- Formatting
 	{ import = "plugins.formatting" },
+
+	-- Fugitive (Git wrapper)
+	{ "tpope/vim-fugitive" },
 })
