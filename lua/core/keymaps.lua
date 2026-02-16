@@ -14,3 +14,9 @@ map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 
+-- turn off highlights
+map("n", "<leader>noh", "<cmd>noh<cr>")
+
+-- jump to definition in new buffer
+map("n", "gv", ":rightbelow vsplit | lua vim.lsp.buf.definition()<CR>")
+map("n", "gb", ":belowright split | lua vim.lsp.buf.definition()<CR>")
