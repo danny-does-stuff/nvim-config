@@ -135,11 +135,11 @@ require("lazy").setup({
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
-			opts = {
-				enable = true,
-				mode = "topline",
-				multiline_threshold = 2,
-			},
+		opts = {
+			enable = true,
+			mode = "topline",
+			multiline_threshold = 2,
+		},
 		config = function(_, opts)
 			require("treesitter-context").setup(opts)
 		end,
@@ -151,8 +151,12 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
 		config = function()
 			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>ff", builtin.find_files)
-			vim.keymap.set("n", "<C-p>", builtin.find_files)
+			vim.keymap.set("n", "<leader>ff", function()
+				builtin.find_files({ hidden = true, file_ignore_patterns = { ".git/" } })
+			end)
+			vim.keymap.set("n", "<C-p>", function()
+				builtin.find_files({ hidden = true, file_ignore_patterns = { ".git/" } })
+			end)
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep)
 			vim.keymap.set("n", "<leader>fb", builtin.buffers)
 			vim.keymap.set("n", "<leader>fs", builtin.grep_string)
