@@ -13,6 +13,7 @@ return {
 				"yamlls",
 				"bashls",
 				"intelephense",
+				"tailwindcss",
 			},
 		},
 	},
@@ -61,8 +62,10 @@ return {
 				},
 			})
 
+			vim.lsp.config("tailwindcss", {})
+
 			-- Enable servers
-			vim.lsp.enable({ "lua_ls", "ts_ls", "eslint", "jsonls", "yamlls", "bashls", "intelephense" })
+			vim.lsp.enable({ "lua_ls", "ts_ls", "eslint", "jsonls", "yamlls", "bashls", "intelephense", "tailwindcss" })
 		end,
 	},
 }
