@@ -22,6 +22,16 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = { "williamboman/mason-lspconfig.nvim" },
 		config = function()
+			-- Diagnostic configuration to show source
+			vim.diagnostic.config({
+				virtual_text = {
+					source = true,
+				},
+				float = {
+					source = true,
+				},
+			})
+
 			-- LSP keymaps applied per-buffer when a server attaches
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(ev)
