@@ -151,6 +151,17 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
 		config = function()
 			local builtin = require("telescope.builtin")
+			local actions = require("telescope.actions")
+			local action_state = require("telescope.actions.state")
+
+			-- Custom action to upload selected file (keeps picker open)
+			local function transfer_upload(_)
+				local selection = action_state.get_selected_entry()
+				if selection then
+					vim.cmd("TransferUpload " .. selection.value)
+				end
+			end
+
 			vim.keymap.set("n", "<leader>ff", function()
 				builtin.find_files({ hidden = true, file_ignore_patterns = { ".git/" } })
 			end)
@@ -160,6 +171,17 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep)
 			vim.keymap.set("n", "<leader>fb", builtin.buffers)
 			vim.keymap.set("n", "<leader>fs", builtin.grep_string)
+
+			-- Git status with upload action
+			vim.keymap.set("n", "<leader>gs", function()
+				builtin.git_status({
+					attach_mappings = function(_, map)
+						map("n", "<C-u>", transfer_upload)
+						map("i", "<C-u>", transfer_upload)
+						return true
+					end,
+				})
+			end, { desc = "Git status (Ctrl+u to upload)" })
 		end,
 	},
 
@@ -240,6 +262,14 @@ require("lazy").setup({
 
 	-- Formatting
 	{ import = "plugins.formatting" },
+
+	-- Transfer.nvim - sync files with remote server
+	{
+		"coffebar/transfer.nvim",
+		lazy = true,
+		cmd = { "TransferInit", "DiffRemote", "TransferUpload", "TransferDownload", "TransferDirDiff", "TransferRepeat" },
+		opts = {},
+	},
 
 	-- Fugitive (Git wrapper)
 	{ "tpope/vim-fugitive" },

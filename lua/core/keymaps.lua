@@ -20,3 +20,7 @@ map("n", "<leader>noh", "<cmd>noh<cr>")
 -- jump to definition in new buffer
 map("n", "gv", ":rightbelow vsplit | lua vim.lsp.buf.definition()<CR>")
 map("n", "gb", ":belowright split | lua vim.lsp.buf.definition()<CR>")
+
+-- transfer.nvim shortcuts
+map("n", "<leader>fu", "<cmd>TransferUpload<cr>", { desc = "Upload file to remote" })
+map("n", "<leader>fd", "<cmd>TransferDownload<cr>", { desc = "Download file from remote" })
