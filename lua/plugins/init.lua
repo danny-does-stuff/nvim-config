@@ -155,10 +155,22 @@ require("lazy").setup({
 			local action_state = require("telescope.actions.state")
 
 			-- Custom action to upload selected file (keeps picker open)
-			local function transfer_upload(_)
+			local function transfer_upload(prompt_bufnr)
 				local selection = action_state.get_selected_entry()
 				if selection then
-					vim.cmd("TransferUpload " .. selection.value)
+					local file_path = selection.value
+					vim.cmd("TransferUpload " .. file_path)
+
+					-- Show feedback in the picker's prompt title
+					local picker = action_state.get_current_picker(prompt_bufnr)
+					local original_title = picker.prompt_title
+					picker.prompt_border:change_title("Uploaded " .. file_path)
+
+					vim.defer_fn(function()
+						if picker and picker.prompt_border then
+							picker.prompt_border:change_title(original_title)
+						end
+					end, 2000)
 				end
 			end
 
@@ -267,7 +279,14 @@ require("lazy").setup({
 	{
 		"coffebar/transfer.nvim",
 		lazy = true,
-		cmd = { "TransferInit", "DiffRemote", "TransferUpload", "TransferDownload", "TransferDirDiff", "TransferRepeat" },
+		cmd = {
+			"TransferInit",
+			"DiffRemote",
+			"TransferUpload",
+			"TransferDownload",
+			"TransferDirDiff",
+			"TransferRepeat",
+		},
 		opts = {},
 	},
 
