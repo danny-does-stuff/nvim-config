@@ -22,6 +22,13 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = { "williamboman/mason-lspconfig.nvim" },
 		config = function()
+			-- Add foldingRange capabilities for nvim-ufo
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true
+			}
+
 			-- Diagnostic configuration to show source
 			vim.diagnostic.config({
 				virtual_text = {
@@ -47,8 +54,9 @@ return {
 				end,
 			})
 
-			-- Server configs (Neovim 0.11+)
+			-- Server configs (Neovim 0.11+) with folding capabilities
 			vim.lsp.config("lua_ls", {
+				capabilities = capabilities,
 				settings = {
 					Lua = {
 						diagnostics = { globals = { "vim" } },
@@ -58,12 +66,13 @@ return {
 				},
 			})
 
-			vim.lsp.config("ts_ls", {})
-			vim.lsp.config("eslint", {})
-			vim.lsp.config("jsonls", {})
-			vim.lsp.config("yamlls", {})
-			vim.lsp.config("bashls", {})
+			vim.lsp.config("ts_ls", { capabilities = capabilities })
+			vim.lsp.config("eslint", { capabilities = capabilities })
+			vim.lsp.config("jsonls", { capabilities = capabilities })
+			vim.lsp.config("yamlls", { capabilities = capabilities })
+			vim.lsp.config("bashls", { capabilities = capabilities })
 			vim.lsp.config("intelephense", {
+				capabilities = capabilities,
 				settings = {
 					intelephense = {
 						format = {
@@ -73,7 +82,7 @@ return {
 				},
 			})
 
-			vim.lsp.config("tailwindcss", {})
+			vim.lsp.config("tailwindcss", { capabilities = capabilities })
 
 			-- Enable servers
 			vim.lsp.enable({ "lua_ls", "ts_ls", "eslint", "jsonls", "yamlls", "bashls", "intelephense", "tailwindcss" })
