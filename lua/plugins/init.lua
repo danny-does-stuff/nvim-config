@@ -293,6 +293,26 @@ require("lazy").setup({
 	-- Fugitive (Git wrapper)
 	{ "tpope/vim-fugitive" },
 
+	-- colorizer for seeing hex colors
+	{
+		"catgoose/nvim-colorizer.lua",
+		event = "VeryLazy",
+		opts = {
+			filetypes = {
+				"*",
+				cmp_docs = { always_update = true },
+				cmp_menu = { always_update = true },
+			},
+			lazy_load = true,
+			user_default_options = {
+				tailwind = "both",
+				tailwind_opts = {
+					update_names = true,
+				},
+			},
+		},
+	},
+
 	-- Folding with nvim-ufo
 	{
 		"kevinhwang91/nvim-ufo",
