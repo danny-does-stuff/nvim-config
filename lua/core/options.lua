@@ -15,8 +15,6 @@ opt.termguicolors = true
 opt.signcolumn = "yes"
 opt.updatetime = 200
 
-opt.clipboard = "unnamedplus"
-
 opt.ignorecase = true
 opt.smartcase = true
 
@@ -25,4 +23,3 @@ opt.listchars = { tab = "│ ", trail = "·", nbsp = "␣" }
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
