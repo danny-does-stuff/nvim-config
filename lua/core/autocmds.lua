@@ -1,3 +1,10 @@
+-- Detect file changes made by external processes (formatters, git, etc.)
+-- and silently reload the buffer if there are no local modifications.
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+  pattern = "*",
+  command = "if mode() != 'c' | checktime | endif",
+})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank({ timeout = 200 })
