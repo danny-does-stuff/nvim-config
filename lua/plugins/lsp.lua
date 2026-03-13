@@ -82,7 +82,24 @@ return {
 				},
 			})
 
-			vim.lsp.config("tailwindcss", { capabilities = capabilities })
+			vim.lsp.config("tailwindcss", {
+				capabilities = capabilities,
+				settings = {
+					tailwindCSS = {
+						classAttributes = { "class", "className", "ngClass", "class:list" },
+						experimental = {
+							classRegex = {
+								-- className: '...'  className: "..."  className: `...`
+								{ "className\\s*:\\s*['\"`]([^'\"`]*)['\"`]", "" },
+								-- className={...} or className="..."
+								{ "className\\s*=\\s*['\"`{]([^'\"`}]*)['\"`}]", "" },
+								-- any key named className in objects: { className: '...' }
+								{ "['\"]className['\"]\\s*:\\s*['\"`]([^'\"`]*)['\"`]", "" },
+							},
+						},
+					},
+				},
+			})
 
 			-- Enable servers
 			vim.lsp.enable({ "lua_ls", "ts_ls", "eslint", "jsonls", "yamlls", "bashls", "intelephense", "tailwindcss" })
