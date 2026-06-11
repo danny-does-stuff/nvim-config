@@ -293,6 +293,17 @@ require("lazy").setup({
 	-- Fugitive (Git wrapper)
 	{ "tpope/vim-fugitive" },
 
+	-- GitLineage - view git history for selected lines
+	{
+		"LionyxML/gitlineage.nvim",
+		dependencies = {
+			"sindrets/diffview.nvim", -- optional, enables opening full commit diffs with <CR>
+		},
+		config = function()
+			require("gitlineage").setup()
+		end,
+	},
+
 	-- colorizer for seeing hex colors
 	{
 		"catgoose/nvim-colorizer.lua",
