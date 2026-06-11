@@ -9,8 +9,8 @@ map("n", "<leader>w", "<cmd>w<cr>")
 map("n", "<leader>q", "<cmd>q<cr>")
 
 -- buffer navigation
-map("n", "<Tab>", "<cmd>bnext<cr>")
-map("n", "<S-Tab>", "<cmd>bprev<cr>")
+map("n", "<leader>bn", "<cmd>bnext<cr>")
+map("n", "<leader>bp", "<cmd>bprev<cr>")
 
 -- telescope buffers (MRU sort)
 local BUFFERS_DESC = "Find buffers (MRU)"
@@ -21,7 +21,6 @@ local function findBuffers()
 	})
 end
 
-map("n", "<leader>b", findBuffers, { desc = BUFFERS_DESC })
 map("n", "<leader>fb", findBuffers, { desc = BUFFERS_DESC })
 
 -- telescope oldfiles
